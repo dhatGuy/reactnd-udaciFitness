@@ -84,7 +84,6 @@ export default function App() {
             backgroundColor: purple
           },
           headerTitleAlign: "center",
-          headerTitle: "Entry Detail"
         }}/>
       </Stack.Navigator>
     )
