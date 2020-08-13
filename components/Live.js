@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { View, Text, ActivityIndicator, Animated } from "react-native";
 import styled from "styled-components/native";
 import { purple, white } from "../utils/colors";
 import { Foundation } from "@expo/vector-icons";
@@ -74,6 +74,7 @@ class Live extends Component {
     coords: null,
     status: null,
     direction: "",
+    bounceValue: new Animated.Value(1),
   };
 
   componentDidMount() {
@@ -101,7 +102,22 @@ class Live extends Component {
       },
       ({ coords }) => {
         const newDirection = calculateDirection(coords.heading);
-        const { direction } = this.state;
+        const { direction, bounceValue } = this.state;
+
+        if (newDirection !== direction) {
+          Animated.sequence([
+            Animated.timing(bounceValue, {
+              duration: 200,
+              toValue: 1.04,
+              useNativeDriver: true,
+            }),
+            Animated.spring(bounceValue, {
+              toValue: 1,
+              friction: 4,
+              useNativeDriver: true,
+            }),
+          ]).start();
+        }
 
         this.setState(() => ({
           coords,
@@ -142,7 +158,12 @@ class Live extends Component {
           <Container>
             <DirectionContainer>
               <Header>You are heading</Header>
-              <Direction>{direction}</Direction>
+              <Direction
+                as={Animated.Text}
+                style={{ transform: [{ scale: this.state.bounceValue }] }}
+              >
+                {direction}
+              </Direction>
             </DirectionContainer>
             <MetricContainer>
               <Metric>
