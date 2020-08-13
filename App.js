@@ -13,6 +13,7 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { createStackNavigator } from "@react-navigation/stack";
 import EntryDetail from "./components/EntryDetail";
+import Live from "./components/Live";
 
 const UdaciStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -70,6 +71,16 @@ export default function App() {
             }}
             component={History}
           />
+          <Tab.Screen
+            name="Live"
+            options={{
+              tabBarLabel: "Live",
+              tabBarIcon: ({ color }) => (
+                <Ionicons name="ios-speedometer" color={color} size={30} />
+              ),
+            }}
+            component={Live}
+          />
         </Tab.Navigator>
     )
   }
@@ -77,7 +88,9 @@ export default function App() {
   const MainNavigator = ()=> {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Tabs" component={Tabs}/>
+        <Stack.Screen name="UdaciFitness" component={Tabs} options={{
+          headerTitleAlign: "center",
+        }}/>
         <Stack.Screen name="EntryDetail" component={EntryDetail} options={{
           headerTintColor: white,
           headerStyle:{
