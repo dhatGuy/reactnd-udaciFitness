@@ -8,7 +8,6 @@ import {
 import UdaciSlider from "./UdaciSlider";
 import UdaciSteppers from "./UdaciSteppers";
 import DateHeader from "./DateHeader";
-// import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import TextButton from "./TextButton";
 import { submitEntry, removeEntry } from "../utils/api";
@@ -16,6 +15,7 @@ import { connect } from "react-redux";
 import { addEntry } from "../actions";
 import styled from "styled-components/native";
 import { purple, white } from "../utils/colors";
+import { CommonActions } from "@react-navigation/native";
 
 const Button = styled.TouchableOpacity`
   background-color: ${purple};
@@ -52,7 +52,7 @@ const Logged = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-`
+`;
 
 function SubmitBtn({ onPress }) {
   return (
@@ -110,6 +110,7 @@ class AddEntry extends Component {
     this.setState(() => ({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 }));
 
     // Navigate to home
+    this.props.goBack()
 
     submitEntry({ key, entry });
 
@@ -125,16 +126,21 @@ class AddEntry extends Component {
     );
 
     // Route to Home
+    this.props.goBack()
 
     removeEntry(key);
   };
+
   render() {
     const metaInfo = getMetricMetaInfo();
 
     if (this.props.alreadyLogged) {
       return (
         <Logged>
-          <Ionicons name={Platform.OS === 'ios' ? "ios-happy" : "md-happy"} size={100} />
+          <Ionicons
+            name={Platform.OS === "ios" ? "ios-happy" : "md-happy"}
+            size={100}
+          />
           <Text>You already logged your information for today.</Text>
           <TextButton onPress={this.reset}>Reset</TextButton>
         </Logged>
@@ -182,4 +188,12 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AddEntry);
+function mapDispatchToProps(dispatch, { navigation }){
+ 
+  return{
+      dispatch,
+      goBack: () => navigation.goBack()
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddEntry);
