@@ -31,7 +31,8 @@
     "styled-components": "^5.1.1",
     "udacifitness-calendar-fix": "^10.1.0",
     "expo-location": "~8.2.1",
-    "expo-permissions": "~9.0.1"
+    "expo-permissions": "~9.0.1",
+    "expo-notifications": "~0.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Platform, StatusBar } from "react-native";
 import AddEntry from "./components/AddEntry";
 import { createStore } from "redux";
@@ -14,6 +14,7 @@ import Constants from "expo-constants";
 import { createStackNavigator } from "@react-navigation/stack";
 import EntryDetail from "./components/EntryDetail";
 import Live from "./components/Live";
+import { setLocalNotification } from "./utils/helpers";
 
 const UdaciStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -23,6 +24,9 @@ const UdaciStatusBar = ({ backgroundColor, ...props }) => {
   );
 };
 export default function App() {
+  useEffect(()=> {
+    setLocalNotification()
+  },[])
   const Tab =
     Platform.OS === "ios"
       ? createMaterialTopTabNavigator()
@@ -84,6 +88,7 @@ export default function App() {
         </Tab.Navigator>
     )
   }
+  
 
   const MainNavigator = ()=> {
     return (

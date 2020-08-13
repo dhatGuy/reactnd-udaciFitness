@@ -1,12 +1,10 @@
 {
   "expo": {
-    "name": "UdaciFit",
-    "slug": "UdaciFit",
+    "sdkVersion": "38.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "https://maxcdn.icons8.com/Color/PNG/512/Sports/triathlon-512.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -16,11 +14,22 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "web": {
+      "favicon": "https://maxcdn.icons8.com/Color/PNG/512/Sports/triathlon-512.png"
+    },
+    "name": "Udacifitness",
+    "description": "The best triathlon training app in the world.",
+    "slug": "udacifitness",
+    "icon": "https://maxcdn.icons8.com/Color/PNG/512/Sports/triathlon-512.png",
+    "notification": {
+      "icon": "https://maxcdn.icons8.com/Color/PNG/512/Sports/triathlon-512.png"
+    },
     "ios": {
+      "bundleIdentifier": "org.udacifitness.exp",
       "supportsTablet": true
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "android": {
+      "package": "org.udacifitness.exp"
     }
   }
 }
